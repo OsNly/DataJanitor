@@ -4,12 +4,7 @@ import numpy as np
 import re
 
 def execute_plan(df: pd.DataFrame, plan: list) -> pd.DataFrame:
-    """
-    Execute a list of cleaning steps on the DataFrame.
-    Supported actions: drop, impute, standardize, normalize, scale,
-    convert_dtype, clip_outliers, fill_outliers, map_values,
-    remove_duplicates, strip_whitespace.
-    """
+
     for step in plan:
         col = step.get("column")
         action = step.get("action")
@@ -46,14 +41,14 @@ def execute_plan(df: pd.DataFrame, plan: list) -> pd.DataFrame:
 
         elif action == "convert_dtype":
             if method in ("int", "float"):
-                # 1️⃣ Filter to keep only numeric-like entries or NaN
+
                 mask = df[col].astype(str).str.match(r'^[0-9]+(?:\.[0-9]+)?$')
                 df = df[mask | df[col].isnull()]
 
-                # 2️⃣ Convert to numeric, coercing errors to NaN
+
                 df[col] = pd.to_numeric(df[col], errors="coerce")
 
-                # 3️⃣ Handle NaNs: fill then cast
+
                 if params.get("impute_missing", False):
                     im = params.get("impute_method", "median")
                     fill = df[col].mean() if im == "mean" else df[col].median()
