@@ -259,10 +259,6 @@ widgetsnbextension
 wordcloud
 wrapt
 yarl
-ydata-core
-ydata-datascience
-ydata-profiling
-ydata-sdk
 zict
 zipp
 zopfli
