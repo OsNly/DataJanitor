@@ -6,6 +6,9 @@ import re
 def execute_plan(df: pd.DataFrame, plan: list) -> pd.DataFrame:
 
     for step in plan:
+        if not isinstance(step, dict):
+            print(f"⚠️ skipping invalid step at index {i}: {step}")
+            continue
         col = step.get("column")
         action = step.get("action")
         method = step.get("method", "")
