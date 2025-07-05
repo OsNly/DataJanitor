@@ -19,7 +19,7 @@ st.title("Smart Data Cleaning & EDA Agent 🤙🏼")
 uploaded_file = st.file_uploader("Upload a CSV file", type=["csv"])
 if uploaded_file:
     try:
-        # Read into pandas DataFrame
+
         df = pd.read_csv(uploaded_file, low_memory=False)
 
         with tempfile.NamedTemporaryFile(delete=False, suffix=".csv") as tmp:
@@ -30,25 +30,25 @@ if uploaded_file:
             analysis = analyze_csv(tmp_path)
         st.success("Analysis complete.")
 
-        # Cleaning Plan
+
         st.header("Cleaning Plan")
         cleaning_plan, explanation = generate_cleaning_plan(analysis)
         st.json(cleaning_plan)
         st.write(explanation)
 
-        # Execute Cleaning
+
         st.header("Executing Cleaning Plan")
         cleaned_df = execute_plan(df, cleaning_plan)
         st.dataframe(cleaned_df)
 
-        # Download Cleaned CSV
+
         st.download_button(
             label="Download Cleaned CSV 🤙🏼",
             data=cleaned_df.to_csv(index=False).encode("utf-8"),
             file_name="cleaned_data.csv",
             mime="text/csv")
         
-        # Insights
+
         st.header("Data Insights")
         with tempfile.NamedTemporaryFile(delete=False, suffix=".csv") as tmp_clean:
             cleaned_df.to_csv(tmp_clean.name, index=False)
@@ -58,7 +58,7 @@ if uploaded_file:
         st.write(insights)
 
 
-        # Visualization Plan & Execution
+
         st.header("Visualizations")
         visual_plan = generate_visual_plan(cleaned_analysis["columns"])
         if visual_plan:
@@ -74,7 +74,7 @@ if uploaded_file:
         else:
             st.warning("No visualization plan was generated.")
 
-        # Generate Report PDF
+
         st.header("Download Report")
         with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as pdf_file:
             report = ReportBuilder(pdf_file.name)
