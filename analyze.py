@@ -1,6 +1,6 @@
 # analyze.py
 import pandas as pd
-from ydata_profiling import ProfileReport
+
 
 
 def analyze_csv(file_path):
