@@ -12,9 +12,9 @@ from report import ReportBuilder
 import tempfile
 import sys
 
-st.set_page_config(page_title="Data Cleaning & EDA Agent 🤙🏼", layout="wide")
+st.set_page_config(page_title="DataJanitor (Data Cleaning & EDA Agent)", layout="wide")
 
-st.title("Smart Data Cleaning & EDA Agent 🤙🏼")
+st.title("DataJanitor (Data Cleaning & EDA Agent)")
 
 uploaded_file = st.file_uploader("Upload a CSV file", type=["csv"])
 if uploaded_file:
