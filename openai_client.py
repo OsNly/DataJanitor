@@ -2,7 +2,7 @@
 import streamlit as st
 from openai import OpenAI
 
-# Load OpenRouter API Key from Streamlit secrets
+
 OPENROUTER_API_KEY = st.secrets["openrouter"]["api_key"]
 
 client = OpenAI(
@@ -14,7 +14,7 @@ client = OpenAI(
     }
 )
 
-MODEL = "google/gemini-2.0-flash-exp:free"
+MODEL = "google/gemini-2.0-flash-lite-001"
 
 def call_llm(prompt: str, temperature: float = 0.0) -> str:
     resp = client.chat.completions.create(
